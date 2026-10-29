@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Agent Message Switchboard",
+    "description": "把 DSH 会话登记到本机 msd，与 Claude Code、Codex 会话互发消息；输入 /ms-register、/ms-auto 管理登记。"
+  }
+}

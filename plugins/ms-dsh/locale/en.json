@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Agent Message Switchboard",
+    "description": "Register this DSH session with the local msd and message Claude Code and Codex sessions; use /ms-register and /ms-auto to manage registration."
+  }
+}

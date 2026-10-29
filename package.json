@@ -1,0 +1,53 @@
+{
+  "name": "agent-message-switchboard",
+  "version": "1.0.0",
+  "description": "Message between AI coding agent sessions across harnesses (Claude Code, Codex, DSH) on one Mac.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/XiaoMa-PM/agent-message-switchboard.git"
+  },
+  "type": "module",
+  "engines": {
+    "node": ">=24.16.0 <25"
+  },
+  "os": [
+    "darwin"
+  ],
+  "cpu": [
+    "arm64"
+  ],
+  "bin": {
+    "ms": "bin/ms.mjs"
+  },
+  "files": [
+    "bin/",
+    "src/",
+    "plugins/ms-dsh/",
+    "!**/AGENTS.md",
+    "!src/adapters/claude/metadata.ts",
+    "!src/adapters/claude/metadata-worker.mjs",
+    "docs/user-guide.md",
+    "CHANGELOG.md",
+    "npm-shrinkwrap.json"
+  ],
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test:unit": "node --test tests/contract/*.test.ts tests/adapters/*.test.ts tests/daemon/*.test.ts tests/cli/*.test.ts",
+    "test:contract": "node --test tests/contract/*.test.ts",
+    "test:e2e:sim": "node --test tests/e2e/*.test.ts",
+    "test": "npm run test:unit && npm run test:e2e:sim",
+    "test:coverage": "node --test --experimental-test-coverage --test-coverage-include='src/**' --test-coverage-lines=80 --test-coverage-functions=80 tests/contract/*.test.ts tests/e2e/*.test.ts tests/adapters/*.test.ts tests/daemon/*.test.ts tests/cli/*.test.ts",
+    "test:adapters": "node --test tests/adapters/*.test.ts",
+    "test:daemon": "node --test tests/daemon/*.test.ts",
+    "test:cli": "node --test tests/cli/*.test.ts"
+  },
+  "dependencies": {
+    "@deepseek-ai/dsh-tools": "0.2.0-rc.2"
+  },
+  "devDependencies": {
+    "@deepseek-ai/dsh-attachment": "0.2.0-rc.2",
+    "@types/node": "24.10.0",
+    "typescript": "5.9.3"
+  }
+}

@@ -1,0 +1,40 @@
+<!doctype html>
+<!-- INPUT: app.css, main.js and icon.svg from the same /ms-ui/ path; no data is ever written into this file. -->
+<!-- OUTPUT: The static shell of the ms ui status page: header, banner, the main area app.js fills, and the read-only footer. -->
+<!-- POS: Page HTML of the status page; no inline script or style (CSP default-src 'none'). -->
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agent Message Switchboard 状态</title>
+<link rel="icon" href="icon.svg">
+<link rel="stylesheet" href="app.css">
+<script type="module" src="main.js"></script>
+</head>
+<body>
+<div class="wrap">
+  <div class="banner" id="banner" role="status" hidden></div>
+
+  <header>
+    <div class="brand">
+      <div class="mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <div>
+        <h1>Agent Message Switchboard</h1>
+        <div class="sub">本机状态 · 只读</div>
+      </div>
+    </div>
+    <div class="status">
+      <span id="daemon"></span>
+      <span class="pill tick" id="tick"></span>
+    </div>
+  </header>
+
+  <main id="main"></main>
+
+  <footer>
+    <div>本页只读。改设置用 <code>ms config set …</code>，或在会话里用 <code>/ms:reply</code>、<code>/ms-reply</code>、<code>$ms-reply</code>。</div>
+    <div>本页只在这台电脑上能打开（127.0.0.1）。在终端按 Ctrl+C 关闭。</div>
+  </footer>
+</div>
+</body>
+</html>

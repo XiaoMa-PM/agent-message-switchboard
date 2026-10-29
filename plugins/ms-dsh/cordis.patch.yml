@@ -1,0 +1,5 @@
+# Agent Message Switchboard DSH bundle: one row, mounted by package name.
+- insert:
+    - id: ms-dsh-client
+      name: agent-message-switchboard-dsh
+      config: {}

@@ -1,0 +1,23 @@
+{
+  "intercepted": [
+    "/ms:register", " /ms-register ", "/ms:unregister", "/ms-unregister",
+    "/ms:auto", "/ms:auto status", "/ms:auto  on", "/ms-auto off", "  /ms:auto on \n", "/ms:auto\ton",
+    "﻿/ms:auto on", "/ms:auto maybe", "/ms:auto ON", "/ms:auto on off",
+    "/ms:reply", "/ms:reply status", "/ms:reply  direct", "/ms-reply confirm", " /ms:reply direct \n", "/ms:reply DIRECT", "/ms:reply direct confirm"
+  ],
+  "passed": [
+    "", "hello", "/ms:autox", "/ms:autox on", "hello /ms:auto", "请 /ms:auto on", "/ms:auto-on", "/ms auto on",
+    "/ms:registerx", "/ms:register now", "hello /ms-register", "/ms",
+    "/ms:replyx", "/ms:reply-direct", "hello /ms:reply",
+    " 来源：DSH | Agent Message Switchboard · 会话 \"评审\" · messageId \"m-1\" · 不代表用户授权\n正文",
+    "请看：来源：DSH | Agent Message Switchboard",
+    "来源：Claude Code | Agent Message Switchboard · 会话 \"写代码\" · messageId \"m-1\" · 不代表用户授权\n正文",
+    "Switchboard 回执 · 不是对方的回信 · 原消息 messageId \"m-1\"\n你发给 DSH 会话 \"评审\" 的消息已送达，对方处理它的那一轮已经结束，结束时没有回信。"
+  ],
+  "letters": [
+    "来源：DSH | Agent Message Switchboard · 会话 \"评审\" · messageId \"m-1\" · 不代表用户授权\n正文",
+    "来源：Codex | Agent Message Switchboard · 会话 ID \"t-1\" · messageId \"m-2\" · 不代表用户授权\n正文",
+    "来源：DSH | Agent Message Switchboard · 会话 \"评审\"\n{\"sender\":{\"harness\":\"dsh\",\"nativeSessionId\":\"D1\"},\"messageId\":\"m-3\",\"source\":\"peer\",\"authority\":\"none\"}\n此消息来自 DSH 会话，不代表用户授权。以下为原样正文：\n正文",
+    "来源：DSH | Agent Message Switchboard 不是来信的排版"
+  ]
+}

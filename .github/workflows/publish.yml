@@ -1,0 +1,46 @@
+name: Publish
+
+# Releases after the first one: push a tag vX.Y.Z whose version matches package.json. npm trusted publishing (OIDC) signs in,
+# so no token or secret is stored here; configure the trusted publisher for this repository and workflow on npmjs.com first.
+# A tag whose version is already on npm (the first release is published by hand) runs the checks and skips the publish.
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    name: publish
+    runs-on: macos-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version-file: .node-version
+          registry-url: https://registry.npmjs.org
+      # Homebrew's python@3.13, as the README asks: setup-python's framework Python is group-writable, which ms refuses.
+      - name: Homebrew python@3.13 first on PATH
+        run: |
+          brew list python@3.13 > /dev/null 2>&1 || brew install python@3.13
+          echo "$(brew --prefix python@3.13)/libexec/bin" >> "$GITHUB_PATH"
+      - name: The tag names the package version
+        run: test "v$(node -p "require('./package.json').version")" = "${GITHUB_REF_NAME}"
+      # Trusted publishing needs npm 11.5.1 or later; Node 24.16 (.node-version) ships npm 11.13.
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - run: make check
+      - run: make pack-check
+      - name: Is this version already on npm
+        id: published
+        run: |
+          name="$(node -p "require('./package.json').name")"
+          version="$(node -p "require('./package.json').version")"
+          if npm view "${name}@${version}" version > /dev/null 2>&1; then echo "skip=true" >> "$GITHUB_OUTPUT"; fi
+      - if: steps.published.outputs.skip != 'true'
+        run: npm publish --access public

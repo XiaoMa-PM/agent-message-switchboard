@@ -1,0 +1,35 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  check:
+    name: check
+    # Apple Silicon: the only platform the package supports (package.json os and cpu), and the identity tests need macOS.
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version-file: .node-version
+      # Homebrew's python@3.13, as the README asks: setup-python's framework Python is group-writable, which ms refuses.
+      - name: Homebrew python@3.13 first on PATH
+        run: |
+          brew list python@3.13 > /dev/null 2>&1 || brew install python@3.13
+          echo "$(brew --prefix python@3.13)/libexec/bin" >> "$GITHUB_PATH"
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - run: make check
+      - run: make pack-check

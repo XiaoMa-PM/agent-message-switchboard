@@ -1,0 +1,21 @@
+{
+  "name": "agent-message-switchboard-dsh",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Agent Message Switchboard for DSH desktop: register this DSH session and message Claude Code / Codex sessions through msd.",
+  "type": "module",
+  "exports": {
+    ".": "./index.mjs",
+    "./package.json": "./package.json",
+    "./locale/*.json": "./locale/*.json"
+  },
+  "icon": "./icon.svg",
+  "engines": {
+    "dsh": ">=0.2.0-rc.2"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  }
+}
